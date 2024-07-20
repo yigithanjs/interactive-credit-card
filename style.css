@@ -1,0 +1,511 @@
+/* Base Styles */
+
+:root{
+    /* PRIMARY */
+    --activeInputBorderI: hsl(249, 99%, 64%);
+    --activeInputBorderII: hsl(278, 94%, 30%);
+    --red: hsl(0, 100%, 66%);
+    /* NEUTRAL */
+    --white: hsl(0, 0%, 100%);
+    --lightGrayishViolet: hsl(270, 3%, 87%);
+    --darkGrayishViolet: hsl(279, 6%, 55%);
+    --veryDarkViolet: hsl(278, 68%, 11%);
+}
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    font-size: 18px;
+    min-height: 100vh;
+    background-color: var(--white);
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 500;
+}
+
+#coloredBackground{
+    background-image: url(/images/bg-main-mobile.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 240px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    color: var(--white);
+    margin-bottom: 90px;
+}
+
+/* Card Styles */
+#cardFront,
+#cardBack {
+    width: 265px;
+    height: 140px;
+    border-radius: 6px;
+    background-size: cover;
+    position: relative;
+}
+
+#cardFront {
+    background-image: url(/images/bg-card-front.png);
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 20px 25px;
+    top: 160px;
+    right: 10px;
+}
+
+#cardFront img {
+    width: 50px;
+    margin-bottom: auto;
+}
+
+#cardNumber {
+    text-align: center;
+    font-size: 15px;
+    letter-spacing: 2.5px;
+}
+
+#cardFront #bottomOfCard {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    margin-top: 15px;
+}
+
+#cardFront #cardExpDate {
+    letter-spacing: 2px;
+}
+
+#cardBack {
+    background-image: url(/images/bg-card-back.png);
+    bottom: 70px;
+    left: 15px;
+}
+
+#cardBack #cardBackExtra {
+    position: relative;
+}
+
+#cardBack #cardCvc {
+    position: absolute;
+    right: 35px;
+    top: 66px;
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+/* Form Styles */
+#formPart {
+    padding: 0 20px;
+    transition: opacity .4s;
+    opacity: 1;
+    position: relative;
+}
+
+button {
+    width: 300px;
+    height: 50px;
+    font-size: 18px;
+    border-radius: 8px;
+    border: none;
+    background-color: var(--veryDarkViolet);
+    color: var(--white);
+    cursor: pointer;
+}
+
+input {
+    width: 280px;
+    height: 40px;
+    color: var(--veryDarkViolet);
+    font-size: 18px;
+    border: 1px solid var(--lightGrayishViolet);
+    border-radius: 8px;
+    padding: 8px 15px;
+    margin-bottom: 20px;
+    outline: none;
+}
+
+::placeholder {
+    color: var(--lightGrayishViolet);
+    opacity: 1; /* Firefox */
+  }
+
+input:focus{
+    content: "";
+    border: 1px solid transparent;
+    border-image: linear-gradient(hsl(249, 99%, 64%), hsl(278, 94%, 30%));
+    border-image-slice: 1;
+}
+
+form p {
+    color: var(--veryDarkViolet);
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#others {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+#others input {
+    width: 60px;
+    padding: 10px 20px 10px 9px;
+}
+
+#cholderName{
+    position: relative;
+}
+
+#cholderName.blank::after{
+    content: "Can't be blank";
+    position: absolute;
+    bottom: 5px;
+    left: 2px;
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--red);
+    visibility: visible;
+}
+
+#cvcDiv {
+    margin-left: 10px;
+    position: relative;
+}
+
+
+#cvcDiv.blaank::after{
+    content: "Can't be blank";
+    position: absolute;
+    bottom: 5px;
+    left: 2px;
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--red);
+    visibility: visible;
+}
+
+#cvcDiv input {
+    width: 140px;
+}
+
+#numberc{
+    position: relative;
+}
+
+#numberc.wrongyx::after {
+    content: "Wrong format, numbers only";
+    position: absolute;
+    bottom: 5px;
+    left: 2px;
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--red);
+    visibility: visible;
+}
+
+#numberc.wrongyy::after {
+    content: "Can't be blank";
+    position: absolute;
+    bottom: 5px;
+    left: 2px;
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--red);
+    visibility: visible;
+}
+
+
+#numberc::after {
+    visibility: hidden;
+}
+
+#expc{
+    position: relative;
+}
+
+#expc.wrongg::after {
+    content: "Can't be blank";
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--red);
+    visibility: visible;
+}
+
+/* tyMessage Styles */
+#tyMessage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: opacity .4s;
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 400px;
+}
+
+#tyMessage h2 {
+    letter-spacing: 4px;
+    font-weight: lighter;
+    margin: 40px 0 20px 0;
+    color: var(--veryDarkViolet);
+}
+
+#tyMessage p {
+    color: var(--darkGrayishViolet);
+    margin-bottom: 50px;
+}
+
+#tyMessage.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+#formPart.hide {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* I GOT BORED CAUSE I FOUND OUT THERE ARE MORE THINGS THAT I SHOULD HAVE ADD AND I DON'T WANT TO ORGANIZE THEM SO I WILL ADD THEM HERE */
+.wrongy{
+    border: 1px solid var(--red);
+}
+
+
+/* Media Queries */
+@media only screen and (min-width: 375px){
+    #cardFront {
+        width: 275px;
+        height: 150px;
+        top: 165px;
+        right: 35px;
+    }
+    
+    #cardNumber {
+        font-size: 16px;
+    }
+
+    #cardBack {
+        width: 275px;
+        height: 150px;
+        bottom: 70px;
+        left: 25px;
+    }
+    
+    #cardBack #cardCvc {
+        top: 68px;
+    }
+
+    button {
+        width: 340px;
+        height: 55px;
+    }
+
+    input {
+        width: 340px;
+        height: 45px;
+    }
+    
+    form p {
+        margin-bottom: 8px;
+    }
+    
+    #others input {
+        width: 80px;
+        padding: 10px 20px 10px 9px;
+    }
+    
+    #cvcDiv {
+        margin-left: 10px;
+        position: relative;
+        left: 3px;
+    }
+    
+    #cvcDiv input {
+        width: 160px;
+    }
+}
+
+@media only screen and (min-width: 1440px) {
+    body {
+        font-size: 18px;
+        min-height: 100vh;
+        position: relative;
+        overflow-y: hidden;
+        overflow-x: hidden;
+    }
+
+    main {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        height: 100vh; 
+    }
+
+    #coloredBackground {
+        background-image: url(/images/bg-main-desktop.png);
+        background-repeat: no-repeat;
+        width: 600px;
+        height: 100vh; 
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        color: var(--white);
+        margin-bottom: 0; 
+    }
+    
+    #cardFront {
+        width: 445px;
+        height: 245px;
+        background-image: url(/images/bg-card-front.png);
+        padding: 25px 38px;
+        position: relative;
+        top: -50px;
+        right: -125px;
+    }
+    
+    #cardFront img {
+        width: 70px;
+    }
+    
+    #cardNumber {
+        font-size: 32px;
+        letter-spacing: 3px;
+    }
+
+    #cardFront #bottomOfCard {
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+        letter-spacing: 2px;
+        margin-top: 35px;
+    }
+    
+    #cardBack {
+        width: 445px;
+        height: 245px;
+        bottom: 20px;
+        left: 205px;
+    }
+    
+    #cardBack #cardCvc {
+        position: absolute;
+        right: 55px;
+        top: 110px;
+        font-size: 14px;
+        letter-spacing: 1px;
+    }
+
+    /* Form Part */
+    #formPart {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+    }
+
+    button {
+        width: 400px;
+        height: 50px;
+        font-size: 18px;
+        margin-top: 10px;
+    }
+
+    input {
+        width: 400px;
+        height: 55px;
+        font-size: 18px;
+        padding: 8px 15px;
+        margin-bottom: 30px;
+    }
+
+    form p {
+        color: var(--veryDarkViolet);
+        font-size: 16px;
+        margin-bottom: 8px;
+    }
+
+    #others input {
+        width: 80px;
+        padding: 10px 20px 10px 9px;
+    }
+
+    #cvcDiv {
+        margin-left: 10px;
+    }
+
+    #cvcDiv input {
+        width: 225px;
+    }
+
+    /* ty Message Part (After the form completion) */
+    #tyMessage {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100vh; /* Ensure it takes full height of viewport */
+        position: absolute;
+        top: 0;
+        left: 250px;
+        transform: translateX(0);
+    }
+
+    #tyMessage h2 {
+        letter-spacing: 6px;
+        font-weight: lighter;
+        margin: 40px 0 20px 0;
+        color: var(--veryDarkViolet);
+        font-size: 32px;
+    }
+
+    #tyMessage p {
+        color: var(--darkGrayishViolet);
+        font-size: 20px;
+        margin-bottom: 50px;
+    }
+
+    #cholderName.blank::after{
+        bottom: 15px;
+    }
+
+    #cvcDiv.blaank::after{
+        bottom: 15px;
+    }
+
+    #numberc.wrongyx::after {
+        bottom: 15px;
+    }
+    
+    #numberc.wrongyy::after {
+        bottom: 15px;
+    }
+    
+     #expc.wrongg::after {
+        bottom: 15px;
+    }
+}
