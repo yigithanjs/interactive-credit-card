@@ -22,61 +22,116 @@ const expc = document.getElementById("expc")
 const cvcDiv = document.getElementById("cvcDiv")
 const cholderName = document.getElementById("cholderName")
 
+let isThereAnyProblem = true
+let isName = false
+let isNumber = false
+let isMonth = false
+let isYear = false
+let isCvc = false
+
 // No brainer input fields (just paste whatever user writes) + zero counter for cvc
 inputName.addEventListener("input", () => {
     if(inputName.value === ""){
         cholderName.classList.add("blank")
+        isName = false
     } else {
         cholderName.classList.remove("blank")
+        isName = true
     }
     cardHolder.innerHTML = inputName.value.toUpperCase()
 })
 
-let cvcZeroCounter = 3
+// CVC input validation
+let cvcZeroCounter = 3;
 inputCvc.addEventListener("input", () => {
     if (inputCvc.value === "") {
         inputCvc.classList.add("wrongy");
-        cvcDiv.classList.add("blaank")
+        cvcDiv.classList.add("blaank");
+        cvcDiv.classList.remove("format")
+        isCvc = false
+    } else if (isNaN(inputCvc.value)) {
+        inputCvc.classList.add("wrongy");
+        cvcDiv.classList.add("format")
+        cvcDiv.classList.remove("blaank");
+        isCvc = false
     } else {
         inputCvc.classList.remove("wrongy");
-        cvcDiv.classList.remove("blaank")
+        cvcDiv.classList.remove("blaank");
+        cvcDiv.classList.remove("format")
+        
+        if(inputCvc.value.length === 3){
+            isCvc = true
+        } else {
+            isCvc = false
+        }
     }
-    cvcZeroCounter = 3 - inputCvc.value.length
-    cardCvc.innerHTML = inputCvc.value + zeroCreator(cvcZeroCounter)
-})
+    cvcZeroCounter = 3 - inputCvc.value.length;
+    cardCvc.innerHTML = inputCvc.value + zeroCreator(cvcZeroCounter);
 
-// To display exp date in 00/00 format without spans
-let expMonthVariable = "00"
-let expYearVariable = "00"
+});
 
-let mmZeroCounter = 2
-let yyZeroCounter = 2
+// Expiry Month input validation
+let expMonthVariable = "00";
+let expYearVariable = "00";
+
+let mmZeroCounter = 2;
+let yyZeroCounter = 2;
 
 inputExpMonth.addEventListener("input", () => {
     if (inputExpMonth.value === "") {
         inputExpMonth.classList.add("wrongy");
-        expc.classList.add("wrongg")
+        expc.classList.add("wrongg");
+        expc.classList.remove("wrongg2");
+        isMonth = false
+    } else if (isNaN(inputExpMonth.value)) {
+        expc.classList.add("wrongg2");
+        expc.classList.remove("wrongg");
+        inputExpMonth.classList.add("wrongy");
+        isMonth = false
     } else {
         inputExpMonth.classList.remove("wrongy");
-        expc.classList.remove("wrongg")
-    }
-    mmZeroCounter = 2 - inputExpMonth.value.length
-    expMonthVariable = inputExpMonth.value + zeroCreator(mmZeroCounter)
-    cardExpDate.innerHTML = expMonthVariable + "/" + expYearVariable
-})
+        expc.classList.remove("wrongg");
+        expc.classList.remove("wrongg2");
 
+        if(inputExpMonth.value.length === 2){
+            isMonth = true
+        } else {
+            isMonth = false
+        }
+    }
+    mmZeroCounter = 2 - inputExpMonth.value.length;
+    expMonthVariable = inputExpMonth.value + zeroCreator(mmZeroCounter);
+    cardExpDate.innerHTML = expMonthVariable + "/" + expYearVariable;
+});
+
+// Expiry Year input validation
 inputExpYear.addEventListener("input", () => {
     if (inputExpYear.value === "") {
         inputExpYear.classList.add("wrongy");
-        expc.classList.add("wrongg")
+        expc.classList.add("wrongg");
+        expc.classList.remove("wrongg2")
+        isYear = false 
+    } else if (isNaN(inputExpYear.value)) {
+        expc.classList.add("wrongg2");
+        expc.classList.remove("wrongg");
+        inputExpYear.classList.add("wrongy");
+        isYear = false 
     } else {
         inputExpYear.classList.remove("wrongy");
-        expc.classList.remove("wrongg")
+        expc.classList.remove("wrongg");
+        expc.classList.remove("wrongg2");
+        isYear = true
+
+        if(inputExpYear.value.length === 2){
+            isYear = true
+        } else {
+            isYear = false
+        }
     }
-    yyZeroCounter = 2 - inputExpYear.value.length
-    expYearVariable = inputExpYear.value + zeroCreator(yyZeroCounter)
-    cardExpDate.innerHTML = expMonthVariable + "/" + expYearVariable
-})
+    yyZeroCounter = 2 - inputExpYear.value.length;
+    expYearVariable = inputExpYear.value + zeroCreator(yyZeroCounter);
+    cardExpDate.innerHTML = expMonthVariable + "/" + expYearVariable;
+});
 
 // Card Number Part :O
 
@@ -84,20 +139,39 @@ let zeroCounter = 16
 let cardNumberCurrent = ""
 
 inputNumber.addEventListener("input", () => {
-    if (isNaN(inputNumber.value)) {
+    // Check if the input value is empty
+    if (inputNumber.value === "") {
+        numberc.classList.add("wrongyy");
+        numberc.classList.remove("wrongyx");
         inputNumber.classList.add("wrongy");
-        numberc.classList.add("wrongyx")
-    } else if(inputNumber.value === ""){
-        numberc.classList.add("wrongyy")
-    } else {
-        inputNumber.classList.remove("wrongy");
-        numberc.classList.remove("wrongyx")
-        numberc.classList.remove("wrongyy")
+        isNumber = false
     }
-    zeroCounter = 16 - inputNumber.value.length
-    cardNumberCurrent = inputNumber.value + zeroCreator(zeroCounter)
-    cardNumber.innerHTML = spacinginator(cardNumberCurrent)
-})
+    // Check if the input value is not a number
+    else if (isNaN(inputNumber.value)) {
+        numberc.classList.remove("wrongyy");
+        numberc.classList.add("wrongyx");
+        inputNumber.classList.add("wrongy");
+        isNumber = false
+    }
+    // If input value is valid
+    else {
+        numberc.classList.remove("wrongyy");
+        numberc.classList.remove("wrongyx");
+        inputNumber.classList.remove("wrongy");
+        isNumber = true
+
+        if(inputNumber.value.length === 16){
+            isNumber = true
+        } else {
+            isNumber = false
+        }
+    }
+    
+    // Update card number display
+    zeroCounter = 16 - inputNumber.value.length;
+    cardNumberCurrent = inputNumber.value + zeroCreator(zeroCounter);
+    cardNumber.innerHTML = spacinginator(cardNumberCurrent);
+});
 
 /* This function is for showing the remaining parts. 
 For example if user types "1" this will look like (1**) or (100) instead of 1 
@@ -128,6 +202,11 @@ function spacinginator(w){
 }
 
 confirmButton.addEventListener("click", () => {
-    formPart.classList.add("hide");
-    tyMessageContainer.classList.add("show");   
+    if(isName, isCvc, isMonth, isYear, isNumber){
+        formPart.classList.add("hide");
+        tyMessageContainer.classList.add("show"); 
+    } else {
+        
+    }
+  
 })
