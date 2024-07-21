@@ -201,6 +201,17 @@ form {
     visibility: visible;
 }
 
+#cvcDiv.format::after{
+    content: "Wrong format, numbers only";
+    position: absolute;
+    bottom: 5px;
+    left: 2px;
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--red);
+    visibility: visible;
+}
+
 #cvcDiv input {
     width: 140px;
 }
@@ -242,6 +253,17 @@ form {
 
 #expc.wrongg::after {
     content: "Can't be blank";
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--red);
+    visibility: visible;
+}
+
+#expc.wrongg2::after {
+    content: "Wrong format, numbers only";
     position: absolute;
     bottom: 5px;
     left: 0;
@@ -506,6 +528,14 @@ form {
     }
     
      #expc.wrongg::after {
+        bottom: 15px;
+    }
+
+    #expc.wrongg2::after {
+        bottom: 15px;
+    }
+
+    #cvcDiv.format::after{
         bottom: 15px;
     }
 }
